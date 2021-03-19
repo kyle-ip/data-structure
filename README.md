@@ -31,11 +31,9 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
 - Graph
   - Depth First Search (DFS)
   - Breadth First Search (BFS)
-  - Unweighted Graph
-    - Connected Component
-    - Single Source Path
+  - Unweighted Graph Algorithm
+    - Bipartite
     - Cycle Detection (Topological Sort)
-    - Bipartite Detection
     - Bridge and Articulation Point
     - Hamilton Path and Loop (Backtracking, State Compress, Memory Search)
     - Euler Path and Loop
@@ -48,7 +46,7 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
       - Max Flow
       - Hungarian
     - Topological Sort
-  - Weighted Graph
+  - Weighted Graph Algorithm
     - The Shortest Path
       - Dijkstra
       - Moore-Bellman-Ford
@@ -62,6 +60,7 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
       - Edmonds-Karp
       - Dinic
       - MPM
+  - other problems: Connected Component, Single Source Path, ...
 - Sorting
   - Bubble Sort
   - Selection Sort
