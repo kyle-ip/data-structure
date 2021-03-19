@@ -1,4 +1,4 @@
-# data structure
+# Data Structure
 
 [![Java](https://img.shields.io/badge/language-Java-orange.svg)]()
 
@@ -19,6 +19,10 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
   - Max Heap
   - Min Heap
 - String (pattern matching)
+  - BF
+  - RK
+  - BM
+  - KMP
 - Skip List
 - Tree
   - Binary Search Tree (BST)
