@@ -1,8 +1,8 @@
-# data-structure
+# data structure
 
 [![Java](https://img.shields.io/badge/language-Java-orange.svg)]()
 
-Data Structure implemented in Java
+Data Structure & Algorithm implemented in Java
 
 Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
 
@@ -27,6 +27,51 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
   - Union Find
   - Trie
   - AC Automaton
+- Bloom Filter
 - Graph
-  - Undirected Graph
-  - Directed Graph
+  - Depth First Search (DFS)
+  - Breadth First Search (BFS)
+  - Unweighted Graph
+    - Connected Component
+    - Single Source Path
+    - Cycle Detection (Topological Sort)
+    - Bipartite Detection
+    - Bridge and Articulation Point
+    - Hamilton Path and Loop (Backtracking, State Compress, Memory Search)
+    - Euler Path and Loop
+      - Backtracking
+      - Fleury
+      - Hierholzer
+    - Strongly Connected Component
+      - Kosaraju
+    - Matching Problem 
+      - Max Flow
+      - Hungarian
+    - Topological Sort
+  - Weighted Graph
+    - The Shortest Path
+      - Dijkstra
+      - Moore-Bellman-Ford
+      - Floyd
+    - Minimum Spanning Tree (MST)
+      - Kruskal 
+      - Prim 
+      - Fredman-Tarjan 
+      - Chazelle
+    - Max Flow
+      - Edmonds-Karp
+      - Dinic
+      - MPM
+- Sorting
+  - Bubble Sort
+  - Selection Sort
+  - Insertion Sort
+  - Shell Sort
+  - Cocktail Shaker Sort
+  - Quick Sort
+  - Heap Sort
+  - Merge Sort
+  - Counting Sort
+  - Bucket Sort
+  - Radix Sort
+  
