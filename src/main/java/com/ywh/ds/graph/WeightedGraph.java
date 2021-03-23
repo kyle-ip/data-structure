@@ -59,6 +59,27 @@ public class WeightedGraph implements Graph {
      * 3 6 5
      * 4 6 7
      *
+     * 5 8
+     * 0 1 4
+     * 0 2 2
+     * 1 2 1
+     * 1 3 2
+     * 1 4 3
+     * 2 3 4
+     * 2 4 5
+     * 3 4 1
+     *
+     * 6 9
+     * 0 1 9
+     * 0 3 9
+     * 1 2 8
+     * 1 3 10
+     * 2 5 10
+     * 3 2 1
+     * 3 4 3
+     * 4 2 8
+     * 4 5 7
+     *
      * @param filename
      */
     public WeightedGraph(String filename, boolean directed) {
@@ -804,12 +825,5 @@ public class WeightedGraph implements Graph {
         }
         res.addFirst(s);
         return res;
-    }
-
-
-    public static void main(String[] args) {
-        WeightedGraph g = new WeightedGraph("C:\\Project\\cs-basic\\algorithm\\java\\src\\main\\java\\com\\ywh\\ds" +
-            "\\graph\\wg2.txt", true);
-        System.out.println(g.maxFlowEdmondsKarp(0, 5));
     }
 }

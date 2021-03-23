@@ -73,6 +73,27 @@ public class UnweightedGraph implements Graph, Cloneable {
         }
     }
 
+    /**
+     * 5 8
+     * 0 1
+     * 1 2
+     * 1 3
+     * 2 0
+     * 2 4
+     * 3 1
+     * 3 2
+     * 4 3
+     *
+     * 5 5
+     * 0 1
+     * 1 2
+     * 2 3
+     * 3 1
+     * 2 4
+     *
+     * @param filename
+     * @param directed
+     */
     public UnweightedGraph(String filename, boolean directed) {
         this.directed = directed;
         File file = new File(filename);
@@ -1680,12 +1701,6 @@ public class UnweightedGraph implements Graph, Cloneable {
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        UnweightedGraph g = new UnweightedGraph("D:\\Project\\cs-basic\\algorithm\\java\\src\\main\\java\\com\\ywh\\ds\\graph\\ug.txt", true);
-        System.out.print(g.stronglyConnectedComponentsKosaraju());
-//        System.out.println(g.shortestPath(0, 6));
     }
 
 }

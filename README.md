@@ -36,10 +36,10 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
   - Depth First Search (DFS)
   - Breadth First Search (BFS)
   - Unweighted Graph Algorithm
-    - Bipartite
+    - Bipartite (DFS, Max Flow)
     - Cycle Detection (Topological Sort)
     - Bridge and Articulation Point
-    - Hamilton Path and Loop (Backtracking, State Compress, Memory Search)
+    - Hamilton Path and Loop
     - Euler Path and Loop
       - Backtracking
       - Fleury
