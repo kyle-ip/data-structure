@@ -8,9 +8,9 @@ import com.ywh.ds.list.ListNode;
  * @author ywh
  * @since 2020/10/29/029
  */
-public class LinkedStack implements Stack {
+public class LinkedStack<T> implements Stack<T> {
 
-    private ListNode top;
+    private ListNode<T> top;
 
     private int count;
 
@@ -26,11 +26,11 @@ public class LinkedStack implements Stack {
      * @return
      */
     @Override
-    public void push(int val) {
+    public void push(T val) {
         //            newNode
         //      栈顶    [ ] -> [ ]    栈底
         //                 <=  top
-        ListNode newNode = new ListNode(val);
+        ListNode<T> newNode = new ListNode<>(val);
         if (top == null) {
             top = newNode;
         } else {
@@ -46,14 +46,14 @@ public class LinkedStack implements Stack {
      * @return
      */
     @Override
-    public int pop() {
+    public T pop() {
         if (top == null) {
             throw new RuntimeException();
         }
         //              ret
         //      栈顶    [ ] -> [ ]    栈底
         //              top =>
-        int ret = top.val;
+        T ret = top.val;
         top = top.next;
         count--;
         return ret;

@@ -8,19 +8,19 @@ import java.util.Objects;
  * @author ywh
  * @since 2/14/2019
  */
-public class ListNode {
+public class ListNode<T> {
 
-    public int val;
+    public T val;
 
-    public ListNode next;
+    public ListNode<T> next;
 
     public ListNode(){}
 
-    public ListNode(int val) {
+    public ListNode(T val) {
         this.val = val;
     }
 
-    public ListNode(int val, ListNode next) {
+    public ListNode(T val, ListNode<T> next) {
         this.val = val;
         this.next = next;
     }
@@ -33,16 +33,8 @@ public class ListNode {
         if (!(o instanceof ListNode)) {
             return false;
         }
-        ListNode listNode = (ListNode) o;
-        ListNode cur1 = this, cur2 = listNode;
-        while (cur1 != null && cur2 != null) {
-            if (cur1.val != cur2.val) {
-                return false;
-            }
-            cur1 = cur1.next;
-            cur2 = cur2.next;
-        }
-        return cur1 == null && cur2 == null;
+        ListNode<?> listNode = (ListNode<?>) o;
+        return val.equals(listNode.val) && next.equals(listNode.next);
     }
 
     @Override
@@ -53,7 +45,7 @@ public class ListNode {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        ListNode cur = this;
+        ListNode<T> cur = this;
         while (cur != null) {
             sb.append(cur.val);
             if (cur.next != null) {

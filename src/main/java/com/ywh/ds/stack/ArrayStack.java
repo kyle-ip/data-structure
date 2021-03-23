@@ -6,12 +6,12 @@ package com.ywh.ds.stack;
  * @author ywh
  * @since 2020/10/29/029
  */
-public class ArrayStack implements Stack {
+public class ArrayStack<T> implements Stack<T> {
 
     /**
      * 数组
      */
-    private final int[] array;
+    private final Object[] array;
 
     /**
      * 元素个数（栈顶指针）
@@ -24,7 +24,7 @@ public class ArrayStack implements Stack {
     private final int n;
 
     public ArrayStack(int n) {
-        this.array = new int[n];
+        this.array = new Object[n];
         this.n = n;
         this.count = 0;
     }
@@ -35,7 +35,7 @@ public class ArrayStack implements Stack {
      * @param val
      */
     @Override
-    public void push(int val) {
+    public void push(T val) {
         // 数组空间不足，直接返回。
         if (count == n) {
             throw new RuntimeException();
@@ -50,11 +50,11 @@ public class ArrayStack implements Stack {
      * @return
      */
     @Override
-    public int pop() {
+    public T pop() {
         if (count == 0) {
             throw new RuntimeException();
         }
-        return array[--count];
+        return (T) array[--count];
     }
 
     /**

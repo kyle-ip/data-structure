@@ -6,18 +6,18 @@ package com.ywh.ds.queue;
  * @author ywh
  * @since 2020/10/29/029
  */
-public class ArrayQueue implements Queue {
+public class ArrayQueue<T> implements Queue<T> {
 
     private int head, tail;
 
-    private final int[] array;
+    private final Object[] array;
 
     int count;
 
     int n;
 
     public ArrayQueue(int n) {
-        this.array = new int[n];
+        this.array = new Object[n];
         this.head = 0;
         this.tail = 0;
         this.count = 0;
@@ -25,7 +25,7 @@ public class ArrayQueue implements Queue {
     }
 
     @Override
-    public void enqueue(int val) {
+    public void enqueue(T val) {
         if (count == n) {
             throw new RuntimeException();
         }
@@ -33,11 +33,11 @@ public class ArrayQueue implements Queue {
     }
 
     @Override
-    public int dequeue() {
+    public T dequeue() {
         if (head == tail) {
             throw new RuntimeException();
         }
-        return array[head++];
+        return (T) array[head++];
     }
 
     @Override

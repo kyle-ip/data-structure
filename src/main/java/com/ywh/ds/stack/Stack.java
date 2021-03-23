@@ -6,21 +6,21 @@ package com.ywh.ds.stack;
  * @author ywh
  * @since 2020/11/11/011
  */
-public interface Stack {
+public interface Stack<T> {
 
     /**
      * 入栈
      *
      * @param val
      */
-    void push(int val);
+    void push(T val);
 
     /**
      * 出栈
      *
      * @return
      */
-    int pop();
+    T pop();
 
     /**
      * 栈长度

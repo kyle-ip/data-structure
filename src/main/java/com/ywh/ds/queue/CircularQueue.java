@@ -11,9 +11,9 @@ package com.ywh.ds.queue;
  * @author ywh
  * @since 2020/10/29/029
  */
-public class CircularQueue implements Queue {
+public class CircularQueue<T> implements Queue<T> {
 
-    private final int[] array;
+    private final Object[] array;
 
     private final int n;
 
@@ -22,7 +22,7 @@ public class CircularQueue implements Queue {
     private int tail = 0;
 
     public CircularQueue(int capacity) {
-        array = new int[capacity];
+        array = new Object[capacity];
         n = capacity;
     }
 
@@ -33,7 +33,7 @@ public class CircularQueue implements Queue {
      * @return
      */
     @Override
-    public void enqueue(int item) {
+    public void enqueue(T item) {
         if ((tail + 1) % n == head) {
             throw new RuntimeException();
         }
@@ -47,11 +47,11 @@ public class CircularQueue implements Queue {
      * @return
      */
     @Override
-    public int dequeue() {
+    public T dequeue() {
         if (head == tail) {
             throw new RuntimeException();
         }
-        int ret = array[head];
+        T ret = (T) array[head];
         head = (head + 1) % n;
         return ret;
     }

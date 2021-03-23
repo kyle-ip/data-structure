@@ -20,20 +20,20 @@ public class LinkedListUtil {
      * @param str
      * @return
      */
-    public static ListNode strToList(String str) {
+    public static ListNode<Integer> strToList(String str) {
         return strToList(str, ",");
     }
 
-    public static ListNode strToList(String str, String splitter) {
+    public static ListNode<Integer> strToList(String str, String splitter) {
         if (str == null || str.length() == 0) {
             return null;
         }
-        ListNode dummy = new ListNode(), cur = dummy;
+        ListNode<Integer> dummy = new ListNode<>(), cur = dummy;
         for (String s : str.split(splitter)) {
             if ("null".equals(s)) {
                 continue;
             }
-            cur.next = new ListNode(Integer.parseInt(s));
+            cur.next = new ListNode<>(Integer.parseInt(s));
             cur = cur.next;
         }
         return dummy.next;
@@ -45,11 +45,11 @@ public class LinkedListUtil {
      * @param list
      * @return
      */
-    public static String listToStr(ListNode list) {
+    public static String listToStr(ListNode<Integer> list) {
         return listToStr(list, ",");
     }
 
-    public static String listToStr(ListNode list, String splitter) {
+    public static String listToStr(ListNode<Integer> list, String splitter) {
         if (list == null) {
             return "";
         }
@@ -70,10 +70,10 @@ public class LinkedListUtil {
      * @param head
      * @return
      */
-    public static boolean hasDuplicatedNode(ListNode head) {
+    public static boolean hasDuplicatedNode(ListNode<Integer> head) {
 
         Set<Integer> set = new HashSet<>();
-        ListNode cur = head;
+        ListNode<Integer> cur = head;
         while (cur != null) {
             if (set.contains(cur.val)) {
                 return true;

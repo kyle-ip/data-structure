@@ -8,9 +8,9 @@ import com.ywh.ds.list.ListNode;
  * @author ywh
  * @since 2020/10/29/029
  */
-public class LinkedQueue implements Queue {
+public class LinkedQueue<T> implements Queue<T> {
 
-    private ListNode tail, head;
+    private ListNode<T> tail, head;
 
     private int n;
 
@@ -21,8 +21,8 @@ public class LinkedQueue implements Queue {
     }
 
     @Override
-    public void enqueue(int val) {
-        ListNode newNode = new ListNode(val);
+    public void enqueue(T val) {
+        ListNode<T> newNode = new ListNode<>(val);
 
         //   [val]            [ ] -> [val]
         // tail/head    =>    head   tail
@@ -38,13 +38,13 @@ public class LinkedQueue implements Queue {
     }
 
     @Override
-    public int dequeue() {
+    public T dequeue() {
         if (head == null) {
             throw new RuntimeException();
         }
         // [val] -> [ ] -> [ ]
         // head =>         tail
-        int val = head.val;
+        T val = head.val;
         head = head.next;
         if (head == null) {
             tail = null;

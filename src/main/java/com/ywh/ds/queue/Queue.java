@@ -6,21 +6,21 @@ package com.ywh.ds.queue;
  * @author ywh
  * @since 2020/11/11/011
  */
-public interface Queue {
+public interface Queue<T> {
 
     /**
      * 入队
      *
      * @param val
      */
-    void enqueue(int val);
+    void enqueue(T val);
 
     /**
      * 出队
      *
      * @return
      */
-    int dequeue();
+    T dequeue();
 
     /**
      * 队列长度
