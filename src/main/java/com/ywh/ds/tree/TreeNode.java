@@ -1,7 +1,5 @@
 package com.ywh.ds.tree;
 
-import lombok.Data;
-
 import java.util.Objects;
 
 /**
@@ -10,7 +8,6 @@ import java.util.Objects;
  * @author ywh
  * @since 2/13/2019
  */
-@Data
 public class TreeNode {
 
     public int val;
@@ -42,13 +39,13 @@ public class TreeNode {
             return false;
         }
         TreeNode node = (TreeNode) o;
-        return getVal() == node.getVal() &&
-            getLeft().equals(node.getLeft()) &&
-            getRight().equals(node.getRight());
+        return val == node.val &&
+            left.equals(node.left) &&
+            right.equals(node.right);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getVal(), getLeft(), getRight());
+        return Objects.hash(val, left, right);
     }
 }

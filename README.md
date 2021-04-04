@@ -1,6 +1,8 @@
 # Data Structure
 
+[![License](https://img.shields.io/badge/license-MIT-4EB1BA.svg)]()
 [![Java](https://img.shields.io/badge/language-Java-orange.svg)]()
+
 
 Data Structure & Algorithm implemented in Java
 
