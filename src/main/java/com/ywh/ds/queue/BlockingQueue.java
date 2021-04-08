@@ -16,6 +16,7 @@ public class BlockingQueue<T> {
     private final LinkedList<T> queue = new LinkedList<>();
 
     private final int size;
+
     /**
      *
      * @param size
@@ -26,7 +27,9 @@ public class BlockingQueue<T> {
 
     private final Lock lock = new ReentrantLock();
 
-    // 条件变量：队列非满、队列非空。
+    /**
+     * 条件变量：队列非满、队列非空。
+     */
     private final Condition notFull = lock.newCondition(), notEmpty = lock.newCondition();
 
     /**
