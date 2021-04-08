@@ -17,7 +17,6 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
   - Array Queue
   - Circular Queue
   - Linked Queue
-  - Blocking Queue
 - Heap
   - Max Heap
   - Min Heap
@@ -80,4 +79,7 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
   - Counting Sort
   - Bucket Sort
   - Radix Sort
-  
+- Concurrent
+  - Blocking Queue
+  - Object Pool (Semaphore)
+  - Cache

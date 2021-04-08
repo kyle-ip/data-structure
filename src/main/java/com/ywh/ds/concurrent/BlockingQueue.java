@@ -1,4 +1,4 @@
-package com.ywh.ds.queue;
+package com.ywh.ds.concurrent;
 
 import java.util.LinkedList;
 import java.util.concurrent.locks.Condition;
