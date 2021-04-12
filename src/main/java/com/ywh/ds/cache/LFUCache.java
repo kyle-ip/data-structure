@@ -21,14 +21,14 @@ class LFUCache {
     /**
      * 键 -> 缓存节点（使 get 操作 O(1)）
      */
-    Map<Integer, FreqNode> keyTable;
+    Map<Integer, Node> keyTable;
 
     /**
      * 频率 -> 缓存节点链表（使 put 操作 O(1)）
      * freqTable/keyTable                1
      *          1           Node(key=1, value=1, freq=1)
      */
-    Map<Integer, LinkedList<FreqNode>> freqTable;
+    Map<Integer, LinkedList<Node>> freqTable;
 
     /**
      *
@@ -52,7 +52,7 @@ class LFUCache {
             return -1;
         }
         // 从 key 表中取出节点并更新使用频率。
-        FreqNode node = keyTable.get(key);
+        Node node = keyTable.get(key);
         updateNode(node, node.val);
         return node.val;
     }
@@ -76,7 +76,7 @@ class LFUCache {
         else {
             // 表已满，清理访问频率最低的节点。
             if (keyTable.size() == capacity) {
-                FreqNode node = freqTable.get(minfreq).getLast();
+                Node node = freqTable.get(minfreq).getLast();
                 keyTable.remove(node.key);
                 freqTable.get(minfreq).removeLast();
                 if (freqTable.get(minfreq).size() == 0) {
@@ -84,7 +84,7 @@ class LFUCache {
                 }
             }
             minfreq = 1;
-            addNode(new FreqNode(key, value, 1));
+            addNode(new Node(key, value, 1));
         }
 
     }
@@ -95,7 +95,7 @@ class LFUCache {
      * @param node
      * @param value
      */
-    private void updateNode(FreqNode node, int value) {
+    private void updateNode(Node node, int value) {
         node.val = value;
 
         // 1. 从 freq 表中删除节点。如果删除后该链表为空，则还需要在哈希表中删除并更新 minFreq。
@@ -119,8 +119,8 @@ class LFUCache {
      *
      * @param node
      */
-    private void addNode(FreqNode node) {
-        LinkedList<FreqNode> list = freqTable.getOrDefault(node.freq, new LinkedList<>());
+    private void addNode(Node node) {
+        LinkedList<Node> list = freqTable.getOrDefault(node.freq, new LinkedList<>());
         list.addFirst(node);
         freqTable.put(node.freq, list);
 
@@ -131,11 +131,10 @@ class LFUCache {
     /**
      * 带访问频率的缓存节点
      */
-    private class FreqNode {
-
+    private static class Node {
         int key, val, freq;
 
-        FreqNode(int key, int val, int freq) {
+        Node(int key, int val, int freq) {
             this.key = key;
             this.val = val;
             this.freq = freq;
