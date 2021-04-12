@@ -126,4 +126,19 @@ class LFUCache {
 
         keyTable.put(node.key, node);
     }
+
+
+    /**
+     * 带访问频率的缓存节点
+     */
+    private class FreqNode {
+
+        int key, val, freq;
+
+        FreqNode(int key, int val, int freq) {
+            this.key = key;
+            this.val = val;
+            this.freq = freq;
+        }
+    }
 }
