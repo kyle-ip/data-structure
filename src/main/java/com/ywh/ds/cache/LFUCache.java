@@ -48,7 +48,6 @@ class LFUCache {
      * @return
      */
     public int get(int key) {
-        // 判空
         if (capacity == 0 || !keyTable.containsKey(key)) {
             return -1;
         }
@@ -100,11 +99,10 @@ class LFUCache {
         node.val = value;
 
         // 1. 从 freq 表中删除节点。如果删除后该链表为空，则还需要在哈希表中删除并更新 minFreq。
-        int freq = node.freq;
-        freqTable.get(freq).remove(node);
-        if (freqTable.get(freq).size() == 0) {
-            freqTable.remove(freq);
-            if (minfreq == freq) {
+        freqTable.get(node.freq).remove(node);
+        if (freqTable.get(node.freq).size() == 0) {
+            freqTable.remove(node.freq);
+            if (minfreq == node.freq) {
                 minfreq += 1;
             }
         }
@@ -125,6 +123,7 @@ class LFUCache {
         LinkedList<FreqNode> list = freqTable.getOrDefault(node.freq, new LinkedList<>());
         list.addFirst(node);
         freqTable.put(node.freq, list);
+
         keyTable.put(node.key, node);
     }
 }
