@@ -37,7 +37,7 @@ class LFUCache {
     public LFUCache(int capacity) {
         this.minfreq = 0;
         this.capacity = capacity;
-        keyTable = new HashMap<>();
+        keyTable = new HashMap<>(capacity);
         freqTable = new HashMap<>();
     }
 
@@ -52,28 +52,10 @@ class LFUCache {
         if (capacity == 0 || !keyTable.containsKey(key)) {
             return -1;
         }
-        // 从 key 表中取出节点（得出值和使用频率）。
+        // 从 key 表中取出节点（得出值和使用频率）并更新。
         FreqNode node = keyTable.get(key);
-        int val = node.val, freq = node.freq;
-
-        // 更新 freq 表：
-        // 1. 从 freq 表中删除节点。
-        freqTable.get(freq).remove(node);
-        // 2. 如果当前链表为空，需要在哈希表中删除并更新 minFreq。
-        if (freqTable.get(freq).size() == 0) {
-            freqTable.remove(freq);
-            if (minfreq == freq) {
-                minfreq += 1;
-            }
-        }
-        // 3. 访问后频率 +1，重新插入到 freq 表和 key 表中。
-        node.freq += 1;
-
-        LinkedList<FreqNode> list = freqTable.getOrDefault(node.freq, new LinkedList<>());
-        list.addFirst(node);
-        freqTable.put(node.freq, list);
-        keyTable.put(key, node);
-        return val;
+        updateNode(node);
+        return node.val;
     }
 
     /**
@@ -85,42 +67,63 @@ class LFUCache {
         if (capacity == 0) {
             return;
         }
-        int freq;
         FreqNode node;
+
         // key 表中不存在该节点。
         if (!keyTable.containsKey(key)) {
-            // 缓存已满，需要进行删除操作
+            // 表已满，清理访问频率最低的节点。
             if (keyTable.size() == capacity) {
-                // 通过 minFreq 拿到 freq_table[minFreq] 链表的末尾节点
                 node = freqTable.get(minfreq).getLast();
                 keyTable.remove(node.key);
-                freqTable.get(minfreq).pollLast();
+                freqTable.get(minfreq).removeLast();
                 if (freqTable.get(minfreq).size() == 0) {
                     freqTable.remove(minfreq);
                 }
             }
-            freq = 1;
+            node = new FreqNode(key, value, 1);
             minfreq = 1;
+            addNode(node);
         }
-        // key 表中已存在该节点。
+        // key 表中已存在该节点，访问频率已变，需要更新节点。
         else {
             node = keyTable.get(key);
-            freq = node.freq;
-            freqTable.get(freq).remove(node);
-            if (freqTable.get(freq).size() == 0) {
-                freqTable.remove(freq);
-                if (minfreq == freq) {
-                    minfreq += 1;
-                }
-            }
-            freq += 1;
+            node.val = value;
+            updateNode(node);
         }
 
-        // 重新加入 key 表、freq 表。
-        node = new FreqNode(key, value, freq);
+    }
+
+    /**
+     * 更新节点（访问频率 +1）。
+     *
+     * @param node
+     */
+    private void updateNode(FreqNode node) {
+        // 1. 从 freq 表中删除节点。如果删除后该链表为空，则还需要在哈希表中删除并更新 minFreq。
+        // 2. 访问后频率 +1，重新插入到 freq 表和 key 表中。
+        int freq = node.freq;
+        freqTable.get(freq).remove(node);
+        if (freqTable.get(freq).size() == 0) {
+            freqTable.remove(freq);
+            if (minfreq == freq) {
+                minfreq += 1;
+            }
+        }
+        node.freq++;
+        addNode(node);
+    }
+
+
+
+    /**
+     * 插入节点到 freq 表和 key 表。
+     *
+     * @param node
+     */
+    private void addNode(FreqNode node) {
         LinkedList<FreqNode> list = freqTable.getOrDefault(node.freq, new LinkedList<>());
         list.addFirst(node);
         freqTable.put(node.freq, list);
-        keyTable.put(key, node);
+        keyTable.put(node.key, node);
     }
 }
