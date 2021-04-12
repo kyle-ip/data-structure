@@ -14,7 +14,7 @@ import java.util.Map;
 class LFUCache {
 
     /**
-     * 最少使用的频率、容量。
+     * 最低访问频率、容量。
      */
     int minfreq, capacity;
 
@@ -52,9 +52,9 @@ class LFUCache {
         if (capacity == 0 || !keyTable.containsKey(key)) {
             return -1;
         }
-        // 从 key 表中取出节点（得出值和使用频率）并更新。
+        // 从 key 表中取出节点并更新使用频率。
         FreqNode node = keyTable.get(key);
-        updateNode(node);
+        updateNode(node, node.val);
         return node.val;
     }
 
@@ -67,38 +67,38 @@ class LFUCache {
         if (capacity == 0) {
             return;
         }
-        FreqNode node;
 
-        // key 表中不存在该节点。
-        if (!keyTable.containsKey(key)) {
+        // key 表中已存在该节点，则更新。
+        if (keyTable.containsKey(key)) {
+            updateNode(keyTable.get(key), value);
+
+        }
+        // key 表中不存在该节点，则插入新节点（更新最低访问频率）。
+        else {
             // 表已满，清理访问频率最低的节点。
             if (keyTable.size() == capacity) {
-                node = freqTable.get(minfreq).getLast();
+                FreqNode node = freqTable.get(minfreq).getLast();
                 keyTable.remove(node.key);
                 freqTable.get(minfreq).removeLast();
                 if (freqTable.get(minfreq).size() == 0) {
                     freqTable.remove(minfreq);
                 }
             }
-            node = new FreqNode(key, value, 1);
             minfreq = 1;
-            addNode(node);
-        }
-        // key 表中已存在该节点，访问频率已变，需要更新节点。
-        else {
-            node = keyTable.get(key);
-            node.val = value;
-            updateNode(node);
+            addNode(new FreqNode(key, value, 1));
         }
 
     }
 
     /**
-     * 更新节点（访问频率 +1）。
+     * 更新节点（设置新值、更新频率）
      *
      * @param node
+     * @param value
      */
-    private void updateNode(FreqNode node) {
+    private void updateNode(FreqNode node, int value) {
+        node.val = value;
+
         // 1. 从 freq 表中删除节点。如果删除后该链表为空，则还需要在哈希表中删除并更新 minFreq。
         int freq = node.freq;
         freqTable.get(freq).remove(node);
