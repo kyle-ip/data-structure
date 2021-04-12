@@ -100,7 +100,6 @@ class LFUCache {
      */
     private void updateNode(FreqNode node) {
         // 1. 从 freq 表中删除节点。如果删除后该链表为空，则还需要在哈希表中删除并更新 minFreq。
-        // 2. 访问后频率 +1，重新插入到 freq 表和 key 表中。
         int freq = node.freq;
         freqTable.get(freq).remove(node);
         if (freqTable.get(freq).size() == 0) {
@@ -109,6 +108,8 @@ class LFUCache {
                 minfreq += 1;
             }
         }
+
+        // 2. 访问后频率 +1，重新插入到 freq 表和 key 表中。
         node.freq++;
         addNode(node);
     }
