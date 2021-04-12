@@ -33,6 +33,7 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
   - Union Find
   - Trie
   - AC Automaton
+- Consistent Hash
 - Bloom Filter
 - Graph
   - Depth First Search (DFS)
