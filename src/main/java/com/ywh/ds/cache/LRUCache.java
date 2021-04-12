@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * LRU 缓存
+ *
  * @author ywh
  * @since 19/03/2021
  */
@@ -58,12 +60,12 @@ public class LRUCache {
      * @param capacity
      */
     public LRUCache(int capacity) {
-        head = new DoublyListNode(-1, -1, null, null);
+        head = new DoublyListNode();
         map = new HashMap<>();
         DoublyListNode node = head;
         // 尾插法创建容量 -1 个节点（因为 head 本身也用于存放数据）。
         for (int i = 0; i < capacity - 1; i++) {
-            node.next = new DoublyListNode(-1, -1, null, node);
+            node.next = new DoublyListNode(null, node);
             node = node.next;
         }
         node.next = head;
