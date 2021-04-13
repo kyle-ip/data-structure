@@ -29,6 +29,7 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
 - Tree
   - Binary Search Tree (BST)
   - Binary Indexed Tree (BIT)
+  - AVL Tree
   - Segment Tree
   - Union Find
   - Trie
