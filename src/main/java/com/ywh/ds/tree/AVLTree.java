@@ -10,47 +10,39 @@ class AVLTree<T extends Comparable<? super T>> {
 
     public AVLTreeNode<T> root;
 
-    // TODO: make these optional based on some sort of 'debug' flag?
-    // at the very least, make them read-only properties
-    public int countInsertions;
+    public int count;
     
     public int countSingleRotations;
 
     public int countDoubleRotations;
 
-    /**
-     * Avl Tree Constructor.
-     * <p>
-     * Creates an empty tree
-     */
     public AVLTree() {
         root = null;
-        countInsertions = 0;
+        count = 0;
         countSingleRotations = 0;
         countDoubleRotations = 0;
     }
 
     /**
-     * Determine the height of the given node.
+     * 获取树高
      *
-     * @param t Node
-     * @return Height of the given node.
+     * @param t
+     * @return
      */
     public int height(AVLTreeNode<T> t) {
         return t == null ? -1 : t.height;
     }
 
     /**
-     * Insert an element into the tree.
+     * 插入节点
      *
-     * @param x Element to insert into the tree
-     * @return True - Success, the Element was added.
-     * False - Error, the element was a duplicate.
+     * @param x
+     * @return
      */
     public boolean insert(T x) {
         try {
             root = insert(x, root);
-            countInsertions++;
+            count++;
             return true;
         } catch (Exception e) { // TODO: catch a DuplicateValueException instead!
             return false;
@@ -58,11 +50,12 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Internal method to perform an actual insertion.
+     * 插入节点
      *
-     * @param x Element to add
-     * @param t Root of the tree
-     * @return New root of the tree
+     * @param x
+     * @param t
+     * @return
+     * @throws Exception
      */
     protected AVLTreeNode<T> insert(T x, AVLTreeNode<T> t) throws Exception {
         if (t == null) {
@@ -100,12 +93,9 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Rotate binary tree node with left child.
-     * For AVL trees, this is a single rotation for case 1.
-     * Update heights, then return new root.
      *
-     * @param k2 Root of tree we are rotating
-     * @return New root
+     * @param k2
+     * @return
      */
     protected AVLTreeNode<T> rotateWithLeftChild(AVLTreeNode<T> k2) {
         AVLTreeNode<T> k1 = k2.left;
@@ -120,13 +110,9 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Double rotate binary tree node: first left child
-     * with its right child; then node k3 with new left child.
-     * For AVL trees, this is a double rotation for case 2.
-     * Update heights, then return new root.
      *
-     * @param k3 Root of tree we are rotating
-     * @return New root
+     * @param k3
+     * @return
      */
     protected AVLTreeNode<T> doubleWithLeftChild(AVLTreeNode<T> k3) {
         k3.left = rotateWithRightChild(k3.left);
@@ -134,12 +120,9 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Rotate binary tree node with right child.
-     * For AVL trees, this is a single rotation for case 4.
-     * Update heights, then return new root.
      *
-     * @param k1 Root of tree we are rotating.
-     * @return New root
+     * @param k1
+     * @return
      */
     protected AVLTreeNode<T> rotateWithRightChild(AVLTreeNode<T> k1) {
         AVLTreeNode<T> k2 = k1.right;
@@ -154,26 +137,18 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Double rotate binary tree node: first right child
-     * with its left child; then node k1 with new right child.
-     * For AVL trees, this is a double rotation for case 3.
-     * Update heights, then return new root.
      *
-     * @param k1 Root of tree we are rotating
-     * @return New root
+     * @param k1
+     * @return
      */
     protected AVLTreeNode<T> doubleWithRightChild(AVLTreeNode<T> k1) {
         k1.right = rotateWithLeftChild(k1.right);
         return rotateWithRightChild(k1);
     }
 
-
     /**
-     * Serialize the tree to a string using an infix traversal.
-     * <p>
-     * In other words, the tree items will be serialized in numeric order.
      *
-     * @return String representation of the tree
+     * @return
      */
     public String serializeInfix() {
         StringBuilder str = new StringBuilder();
@@ -182,10 +157,10 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Internal method to infix-serialize a tree.
      *
-     * @param t   Tree node to traverse
-     * @param str Accumulator; string to keep appending items to.
+     * @param t
+     * @param str
+     * @param sep
      */
     protected void serializeInfix(AVLTreeNode<T> t, StringBuilder str, String sep) {
         if (t != null) {
@@ -197,12 +172,8 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Serialize the tree to a string using a prefix traversal.
-     * <p>
-     * In other words, the tree items will be serialized in the order that
-     * they are stored within the tree.
      *
-     * @return String representation of the tree
+     * @return
      */
     public String serializePrefix() {
         StringBuilder str = new StringBuilder();
@@ -211,10 +182,10 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Internal method to prefix-serialize a tree.
      *
-     * @param t   Tree node to traverse
-     * @param str Accumulator; string to keep appending items to.
+     * @param t
+     * @param str
+     * @param sep
      */
     private void serializePrefix(AVLTreeNode<T> t, StringBuilder str, String sep) {
         if (t != null) {
@@ -226,26 +197,23 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Deletes all nodes from the tree.
+     *
      */
     public void makeEmpty() {
         root = null;
     }
 
     /**
-     * Determine if the tree is empty.
      *
-     * @return True if the tree is empty
+     * @return
      */
     public boolean isEmpty() {
         return root == null;
     }
 
-
     /**
-     * Find the smallest item in the tree.
      *
-     * @return smallest item or null if empty.
+     * @return
      */
     public T findMin() {
         if (isEmpty()) {
@@ -255,9 +223,8 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Find the largest item in the tree.
      *
-     * @return the largest item of null if empty.
+     * @return
      */
     public T findMax() {
         if (isEmpty()) {
@@ -267,10 +234,9 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Internal method to find the smallest item in a subtree.
      *
-     * @param t the node that roots the tree.
-     * @return node containing the smallest item.
+     * @param t
+     * @return
      */
     private AVLTreeNode<T> findMin(AVLTreeNode<T> t) {
         if (t == null) {
@@ -283,10 +249,9 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Internal method to find the largest item in a subtree.
      *
-     * @param t the node that roots the tree.
-     * @return node containing the largest item.
+     * @param t
+     * @return
      */
     private AVLTreeNode<T> findMax(AVLTreeNode<T> t) {
         if (t == null) {
@@ -299,19 +264,20 @@ class AVLTree<T extends Comparable<? super T>> {
         return t;
     }
 
-
-// A version of remove from http://www.dreamincode.net/forums/topic/214510-working-example-of-avl-tree-remove-method/
-// but it needs some attention and does not appear to be 100% correct
-
     /**
-     * Remove from the tree. Nothing is done if x is not found.
      *
-     * @param x the item to remove.
+     * @param x
      */
     public void remove(T x) {
         root = remove(x, root);
     }
 
+    /**
+     *
+     * @param x
+     * @param t
+     * @return
+     */
     public AVLTreeNode<T> remove(T x, AVLTreeNode<T> t) {
         if (t == null) {
             System.out.println("Sorry but you're mistaken, " + null + " doesn't exist in this tree :)\n");
@@ -346,10 +312,7 @@ class AVLTree<T extends Comparable<? super T>> {
                 }
             }
         }
-      /*
-         Here, we have ended up when we are node which shall be removed.
-         Check if there is a left-hand node, if so pick out the largest element out, and move down to the root.
-       */
+
         else if (t.left != null) {
             t.element = findMax(t.left).element;
             remove(t.element, t.left);
@@ -376,9 +339,7 @@ class AVLTree<T extends Comparable<? super T>> {
         return t;
     }
 
-
     /**
-     * Search for an element within the tree.
      *
      * @param x
      * @return
@@ -388,11 +349,10 @@ class AVLTree<T extends Comparable<? super T>> {
     }
 
     /**
-     * Internal find method; search for an element starting at the given node.
      *
-     * @param x Element to find
-     * @param t Root of the tree
-     * @return True if the element is found, false otherwise
+     * @param x
+     * @param t
+     * @return
      */
     protected boolean contains(T x, AVLTreeNode<T> t) {
         if (t == null) {
@@ -448,6 +408,11 @@ class AVLTree<T extends Comparable<? super T>> {
         return Math.max(rightHeight, leftHeight) + 1;
     }
 
+    /**
+     *
+     * @param current
+     * @return
+     */
     public boolean checkOrderingOfTree(AVLTreeNode<Integer> current) {
         if (current.left != null) {
             if (current.left.element.compareTo(current.element) > 0) {

@@ -59,6 +59,8 @@ Mind Map: https://www.processon.com/view/link/5f9193b81e085307a09e598b
       - Dijkstra
       - Moore-Bellman-Ford
       - Floyd
+    - Search Path
+      - A\*
     - Minimum Spanning Tree (MST)
       - Kruskal 
       - Prim 
