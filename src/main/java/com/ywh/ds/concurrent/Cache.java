@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.locks.*;
 
 /**
- * 基于信号量实现限流器实现缓存
+ * 基于信号量实现缓存
  *
  * @author ywh
  * @since 4/8/2021

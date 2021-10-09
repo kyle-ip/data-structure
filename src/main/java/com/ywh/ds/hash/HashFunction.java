@@ -4,9 +4,6 @@ package com.ywh.ds.hash;
  * @author ywh
  * @since 4/12/2021
  */
-/**
- *
- */
 public class HashFunction {
 
     /**
